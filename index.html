@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Happy Birthday, Jaya Mausi! ✨🎂</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Playfair Display (Luxury Serif), Poppins (Warm Sans-serif), Caveat (Signature Script) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="bg-[#FFFDF9] text-[#3D2E2D] overflow-x-hidden antialiased">
+
+    <!-- Canvas for Confetti Particle System -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Floating Audio Background Player -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="assets/audio/hbd.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-toggle" class="music-toggle-btn shadow-md" aria-label="Toggle Music">
+        <i id="music-icon" class="fa-solid fa-play text-xl text-[#8F5B59]"></i>
+    </button>
+
+    <!-- ==========================================================================
+       Overlay: Virtual Cake Cutting & Candle Blowing Screen
+       ========================================================================== -->
+    <div id="birthday-overlay"
+        class="overlay-container fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none">
+        <div class="max-w-md mx-auto flex flex-col items-center">
+            <h2 class="font-playfair text-3xl md:text-4xl text-[#8F5B59] mb-2 font-bold">A Special Surprise for Mausi...
+                ✨</h2>
+            <p class="text-sm md:text-base text-[#7E6C6B] mb-8 font-medium">Jaya Mausi, blow the candles to unlock your
+                card!</p>
+
+            <!-- CSS Birthday Cake -->
+            <div class="cake-container">
+                <div class="plate"></div>
+                <div class="cake-body">
+                    <!-- Frosting details -->
+                    <div class="icing"></div>
+                    <div class="drip drip-1"></div>
+                    <div class="drip drip-2"></div>
+                    <div class="drip drip-3"></div>
+                    <div class="drip drip-4"></div>
+                    <div class="drip drip-5"></div>
+                    <div class="drip drip-6"></div>
+                    <div class="cream-dots">
+                        <div class="cream-dot"></div>
+                        <div class="cream-dot"></div>
+                        <div class="cream-dot"></div>
+                        <div class="cream-dot"></div>
+                        <div class="cream-dot"></div>
+                        <div class="cream-dot"></div>
+                    </div>
+                </div>
+                <!-- Interactive Candles -->
+                <div class="candles-row">
+                    <div class="candle" id="candle-1">
+                        <div class="candle-wick"></div>
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" id="candle-2">
+                        <div class="candle-wick"></div>
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" id="candle-3">
+                        <div class="candle-wick"></div>
+                        <div class="flame"></div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="font-caveat text-3xl text-[#D2A85C] animate-pulse mt-4">Tap each candle to blow it out! 🕯️</p>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+       Hero Section
+       ========================================================================== -->
+    <header class="relative w-full py-16 px-4 md:py-24 rose-gold-gradient overflow-hidden">
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/30 via-transparent to-transparent pointer-events-none">
+        </div>
+        <div class="max-w-md mx-auto text-center flex flex-col items-center">
+
+            <!-- Beautiful AI generated banner -->
+            <div class="w-full rounded-2xl overflow-hidden glow-shadow-lg mb-8 relative border-2 border-white/80">
+                <img src="assets/images/jaya_banner.png" alt="Happy Birthday Jaya Mausi"
+                    class="w-full h-auto object-cover max-h-[380px]">
+            </div>
+
+            <!-- Title content -->
+            <span class="font-caveat text-4xl text-[#8F5B59] mb-2 block">Dearest Mausi,</span>
+            <h1 class="font-playfair text-4xl md:text-5xl font-extrabold tracking-tight text-[#3D2E2D] mb-4">
+                Happy Birthday, <span class="rose-gold-text-gradient block mt-1 font-extrabold">Jaya Mausi!</span>
+            </h1>
+            <p class="text-sm md:text-base text-[#7E6C6B] leading-relaxed max-w-sm">
+                Celebrating the grace, love, and light you bring to our family on June 21st 💖✨
+            </p>
+
+            <!-- Scroll Down Indicator -->
+            <div class="mt-8 animate-bounce text-[#8F5B59]">
+                <i class="fa-solid fa-chevron-down text-2xl"></i>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ==========================================================================
+       Heartfelt Wish Card (written from Ashish)
+       ========================================================================== -->
+    <section class="py-12 px-4 max-w-md mx-auto">
+        <div
+            class="fade-in-on-scroll bg-[#FAF3EA] rounded-3xl p-6 glow-shadow border border-[#E8CDCC]/30 flex flex-col gap-6">
+
+            <!-- Mausi Single Image (correct double space filename) -->
+            <div class="w-full rounded-2xl overflow-hidden shadow-md">
+                <img src="assets/images/single image  jaya  mausi.jpeg" alt="Jaya Mausi"
+                    class="w-full h-64 object-cover object-center">
+            </div>
+
+            <!-- Letter from Ashish -->
+            <div class="text-center md:text-left">
+                <h2 class="font-playfair text-2xl text-[#8F5B59] mb-4 font-bold border-b border-[#E8CDCC]/50 pb-2">A
+                    Message For You... ✉️</h2>
+                <div class="text-[#3D2E2D] text-sm md:text-base leading-relaxed space-y-4 font-normal text-justify">
+                    <p>
+                        Dear Jaya Mausi,
+                    </p>
+                    <p>
+                        On your special day, I want to tell you how incredibly blessed I feel to have you in my life.
+                        Your maternal warmth, your gentle guide, and the unconditional love you shower upon all of us
+                        make you so special.
+                    </p>
+                    <p>
+                        You are a pillar of strength, grace, and support in our family. Thank you for always listening
+                        with patience and filling our hearts with joy and blessings.
+                    </p>
+                    <p>
+                        May the Lord bless you with robust health, peace of mind, and endless happiness in this
+                        beautiful year ahead. Happy Birthday once again, Mausi! 🎂🎈
+                    </p>
+                </div>
+                <div class="text-right mt-6">
+                    <span class="font-caveat text-3xl text-[#8F5B59] font-bold block">- With love and respect,</span>
+                    <span class="font-playfair text-xl text-[#3D2E2D] font-bold">Ashish</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       Mausa & Mausi Bond Section
+       ========================================================================== -->
+    <section class="py-12 px-4 max-w-md mx-auto">
+        <div class="fade-in-on-scroll bg-white rounded-3xl p-6 glow-shadow border border-[#E8CDCC]/30 text-center">
+            <h2 class="font-playfair text-2xl text-[#8F5B59] font-bold mb-1">A Beautiful Bond 💑</h2>
+            <p class="text-xs text-[#7E6C6B] mb-6">Celebrating the love and unity of Mausa & Mausi</p>
+
+            <!-- Main Couple Photo -->
+            <div class="gallery-card mb-6">
+                <img src="assets/images/mausa mausi couple.jpeg" alt="Mausa and Mausi" class="w-full h-64 object-cover">
+            </div>
+
+            <p class="text-sm text-[#3D2E2D] leading-relaxed italic px-2 mb-6">
+                "Together is a beautiful place to be. Your bond and love are an inspiration to our entire family."
+            </p>
+
+            <!-- Mini grid of Mausa & Mausi together -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="gallery-card">
+                    <img src="assets/images/both couple.jpeg" alt="Mausa Mausi Moment" class="w-full h-28 object-cover">
+                </div>
+                <div class="gallery-card">
+                    <img src="assets/images/both.jpeg" alt="Mausa Mausi Smile" class="w-full h-28 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       Interactive Quotes / Blessings Generator
+       ========================================================================== -->
+    <section class="py-12 px-4 max-w-md mx-auto">
+        <div class="fade-in-on-scroll text-center">
+            <h2 class="font-playfair text-2xl text-[#8F5B59] font-bold mb-2">A Special Blessing For You 🌸</h2>
+            <p class="text-xs text-[#7E6C6B] mb-6">Tap the button to read a custom birthday quote for Mausi</p>
+
+            <div class="quote-container w-full min-h-[220px] flex items-center justify-center">
+                <div id="quote-inner-card"
+                    class="bg-[#FAF3EA] rounded-2xl p-6 glow-shadow border-2 border-dashed border-[#E8CDCC] w-full min-h-[180px] flex flex-col justify-center items-center relative">
+                    <i class="fa-solid fa-quote-left text-4xl text-[#E8CDCC]/50 absolute top-4 left-4"></i>
+                    <p id="quote-text" class="text-base font-playfair italic text-[#3D2E2D] px-4 leading-relaxed z-10">
+                        "Wishing you a day as elegant, warm, and beautiful as your soul, Jaya Mausi. Happy Birthday!
+                        🎂✨"
+                    </p>
+                    <i class="fa-solid fa-quote-right text-4xl text-[#E8CDCC]/50 absolute bottom-4 right-4"></i>
+                </div>
+            </div>
+
+            <button id="change-quote-btn"
+                class="mt-6 rose-gold-btn text-xs font-bold py-3 px-6 rounded-full inline-flex items-center gap-2">
+                <i class="fa-solid fa-wand-sparkles"></i> Get Another Blessing
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       Photo Collection Section
+       ========================================================================== -->
+    <section class="py-12 px-4 max-w-md mx-auto">
+        <div class="fade-in-on-scroll">
+            <h2 class="font-playfair text-2xl text-[#8F5B59] font-bold text-center mb-1">Collection of Moments 📸</h2>
+            <p class="text-xs text-[#7E6C6B] text-center mb-8">Memories that bring a smile to our hearts</p>
+
+            <!-- Mobile Optimized Masonry Grid -->
+            <div class="grid grid-cols-2 gap-4">
+
+                <!-- Col 1 -->
+                <div class="flex flex-col gap-4">
+                    <div class="gallery-card">
+                        <img src="assets/images/single.jpeg" alt="Mausi Portrait" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-card">
+                        <img src="assets/images/good.jpeg" alt="Good Times" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-card">
+                        <img src="assets/images/best.jpeg" alt="Best Picture" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-card">
+                        <img src="assets/images/old.jpeg" alt="Old memory" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-card">
+                        <img src="assets/images/boht.jpeg" alt="Sweet memory" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div class="flex flex-col gap-4">
+                    <div class="gallery-card">
+                        <img src="assets/images/mausa single image.jpeg" alt="Mausa ji single"
+                            class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-card">
+                        <img src="assets/images/image.jpeg" alt="Beautiful Moment" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="gallery-card">
+                        <img src="assets/images/c.jpeg" alt="Lovely smile" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       Secret Surprise Box (Do Not Open Box) Section
+       ========================================================================== -->
+    <section class="py-12 px-4 max-w-md mx-auto text-center">
+        <div class="fade-in-on-scroll secret-box-card rounded-3xl p-6 glow-shadow">
+            <div class="secret-box-icon text-5xl mb-4 text-[#D2A85C]">
+                <i class="fa-solid fa-box-archive"></i>
+            </div>
+            <h3 class="font-playfair text-xl text-[#3D2E2D] font-bold mb-2">🔒 DO NOT OPEN BOX</h3>
+            <p class="text-xs text-[#7E6C6B] mb-6 leading-relaxed">
+                Mausi, you are not supposed to open this secret box. Click it only if you want to break the rules! 😜
+            </p>
+            <button id="open-secret-box-btn" class="rose-gold-btn text-xs font-bold py-3.5 px-8 rounded-full">
+                <i class="fa-solid fa-lock-open mr-2"></i> Open Box Anyway!
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       Party Treat Request Section
+       ========================================================================== -->
+    <section class="py-12 px-4 max-w-md mx-auto text-center">
+        <div class="fade-in-on-scroll bg-white rounded-3xl p-6 glow-shadow border border-[#E8CDCC]/30">
+            <div class="text-5xl mb-4 text-[#D2A85C]">
+                <i class="fa-solid fa-cake-candles"></i>
+            </div>
+            <h3 class="font-playfair text-xl text-[#3D2E2D] font-bold mb-2">🥳 Ashish's Party Request!</h3>
+            <p class="text-xs text-[#7E6C6B] mb-6 leading-relaxed">
+                Mausi, the special birthday card is ready, and now Ashish is waiting for his birthday party treat! Send
+                him Paytm or request a party directly on WhatsApp! 🍰🎉
+            </p>
+
+            <a href="https://wa.me/919354368207?text=baua%20paytm%20kr%20rhi%20hu%20paise%20abhi%20party%20kar%20lo"
+                target="_blank" class="rose-gold-btn text-xs font-bold py-3.5 px-8 rounded-full inline-block">
+                <i class="fa-brands fa-whatsapp mr-2 text-sm"></i> Send Party Paytm Details! 📲
+            </a>
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       UPI Blessings Modal Section
+       ========================================================================== -->
+    <section class="py-12 px-4 max-w-md mx-auto text-center">
+        <div class="fade-in-on-scroll bg-[#FAF3EA] rounded-3xl p-6 glow-shadow border border-[#E8CDCC]/30">
+            <h3 class="font-playfair text-xl text-[#3D2E2D] font-bold mb-2">Made you smile, Mausi? 😊</h3>
+            <p class="text-xs text-[#7E6C6B] mb-6 leading-relaxed">
+                If this surprise brought a smile to your face, you can bless Ashish or scan below to gift him a cup of
+                coffee! ☕
+            </p>
+            <button id="show-upi-btn" class="rose-gold-btn text-xs font-bold py-3.5 px-8 rounded-full">
+                <i class="fa-solid fa-gift mr-2"></i> Give Blessings / Gift Ashish
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ==========================================================================
+       Modal: Photo Lightbox (Zoom view)
+       ========================================================================== -->
+    <div id="lightbox-modal" class="hidden lightbox-modal fixed inset-0 z-50 justify-center items-center p-4">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white text-3xl focus:outline-none"
+            aria-label="Close Lightbox">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div id="lightbox-img-container" class="max-w-full max-h-full flex justify-center items-center">
+            <img id="lightbox-img" src="" alt=""
+                class="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain border-2 border-white/10">
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+       Modal: UPI QR Code
+       ========================================================================== -->
+    <div id="upi-modal" class="hidden lightbox-modal fixed inset-0 z-50 justify-center items-center p-4">
+        <div
+            class="bg-white rounded-3xl p-6 max-w-xs w-full text-center relative glow-shadow-lg border border-[#E8CDCC]/20">
+            <button id="close-upi-btn" class="absolute top-4 right-4 text-[#8F5B59] text-xl focus:outline-none"
+                aria-label="Close UPI Modal">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <h3 class="font-playfair text-xl text-[#3D2E2D] font-bold mb-2">Scan & Send Blessings</h3>
+            <p class="text-xs text-[#7E6C6B] mb-4">Scan the QR code below using any UPI app (GPay, PhonePe, Paytm, etc.)
+            </p>
+
+            <!-- Dynamic QR Code generator via public api -->
+            <div class="p-3 bg-[#FAF3EA] rounded-2xl inline-block border border-[#E8CDCC]/20 shadow-inner mb-4">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=3D2E2D&bgcolor=FAF3EA&data=upi://pay?pa=vivek33pal@ptyes%26pn=Ashish%26tn=Blessings%20for%20the%20website"
+                    alt="UPI QR Code" class="w-48 h-48 rounded-lg">
+            </div>
+
+            <p class="text-sm font-semibold text-[#3D2E2D] mb-1">UPI ID: <span
+                    class="text-[#8F5B59]">vivek33pal@ptyes</span></p>
+            <p class="text-[10px] text-[#7E6C6B] uppercase font-bold tracking-wider mb-4">Payee: Ashish</p>
+
+            <a href="upi://pay?pa=vivek33pal@ptyes&pn=Ashish&tn=Blessings%20for%20the%20website"
+                class="w-full text-center bg-[#8F5B59] hover:bg-[#774745] text-white text-xs font-bold py-3.5 px-4 rounded-xl block transition-all shadow-md">
+                <i class="fa-solid fa-mobile-screen-button mr-2"></i> Pay Directly with UPI App
+            </a>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+       Modal: Secret Surprise Box (Do Not Open Box)
+       ========================================================================== -->
+    <div id="secret-box-modal" class="hidden lightbox-modal fixed inset-0 z-50 justify-center items-center p-4">
+        <div
+            class="bg-white rounded-3xl p-6 max-w-xs w-full text-center relative glow-shadow-lg border border-[#E8CDCC]/20 flex flex-col items-center">
+            <button id="close-secret-box-btn" class="absolute top-4 right-4 text-[#8F5B59] text-xl focus:outline-none"
+                aria-label="Close Modal">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <h3 class="font-playfair text-2xl text-[#3D2E2D] font-bold mb-2">Caught You! 😜</h3>
+            <p class="text-xs text-[#7E6C6B] mb-4">Mausi, open hi karna hai koi nahi apki marzi...</p>
+
+            <!-- Funny popping cat GIF -->
+            <div class="w-full rounded-2xl overflow-hidden mb-4 border border-[#E8CDCC]/30 shadow-inner">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2ZTNrc3o3ZDRoN3RydnlkZzgyb3c0NXU3ejV6NDk5OWE2a2I2OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L195SspgjE8Y8/giphy.gif"
+                    alt="Surprise cat GIF" class="w-full h-auto">
+            </div>
+
+            <p class="text-sm font-semibold text-[#8F5B59] mb-4 leading-relaxed">
+                "Mana Kia tha na! But koi na since it's your birthday, your punishment is to receive a giant virtual hug
+                from Ashish! kar lo party aur mujhe bhi party chahiye!" ❤️🎂
+            </p>
+
+            <button id="secret-box-modal-accept"
+                onclick="document.getElementById('secret-box-modal').classList.add('hidden')"
+                class="w-full text-center bg-[#8F5B59] hover:bg-[#774745] text-white text-xs font-bold py-3.5 px-4 rounded-xl shadow-md">
+                <i class="fa-solid fa-heart mr-2"></i> Accept Punishment!
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+       Footer
+       ========================================================================== -->
+    <footer class="bg-[#3D2E2D] text-[#FFFDF9] py-10 px-4 text-center border-t border-[#8F5B59]/20">
+        <div class="max-w-md mx-auto">
+            <p class="font-caveat text-3xl text-[#D2A85C] mb-2">Designed with love ❤️ by Ashish</p>
+            <p class="text-[10px] text-[#7E6C6B] uppercase tracking-wider mb-6">Made specifically for Jaya Mausi's
+                Birthday</p>
+
+            <div class="flex justify-center items-center gap-3">
+                <a href="https://wa.me/919354368207" target="_blank"
+                    class="bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs py-2 px-5 rounded-full inline-flex items-center gap-2 transition-all">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Message Ashish
+                </a>
+            </div>
+
+            <p class="text-[10px] text-[#7E6C6B] mt-8">© 2026 Ashish. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive script files -->
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
